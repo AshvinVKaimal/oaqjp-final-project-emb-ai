@@ -1,11 +1,3 @@
-"""
-Server module for the Emotion Detection web application.
-
-This script initializes a Flask server that processes customer feedback text,
-analyzes it for emotional sentiment via the EmotionDetection package,
-and returns formatted responses to the web interface.
-"""
-
 from flask import Flask, render_template, request
 from EmotionDetection import emotion_detector
 
@@ -13,13 +5,6 @@ app = Flask(__name__)
 
 @app.route("/emotionDetector")
 def emotion_analysis():
-    """
-    Analyze the incoming text from the user request arguments.
-
-    Retrieves the string parameter 'textToAnalyze', runs the emotion
-    detector, handles error validation, and builds a descriptive
-    text output of the scores and dominant emotion.
-    """
     text = request.args.get('textToAnalyze')
     response = emotion_detector(text)
 
@@ -37,8 +22,7 @@ def emotion_analysis():
 
     output = (
         f"For the given statement, the system response is "
-        f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, "
-        f"'joy': {joy} and 'sadness': {sadness}. "
+        f"'anger': {anger}, 'disgust': {disgust}, 'fear': {fear}, 'joy': {joy} and 'sadness': {sadness}. "
         f"The dominant emotion is {dominant_emotion}."
     )
 
@@ -46,9 +30,6 @@ def emotion_analysis():
 
 @app.route("/")
 def render_index():
-    """
-    Render the main application interface homepage template.
-    """
     return render_template('index.html')
 
 if __name__ == "__main__":
